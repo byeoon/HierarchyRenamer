@@ -2,9 +2,9 @@
 
 public class ExampleEditorScript
 {
-    [MenuItem("Example Editor Script/Test")]
+    [MenuItem("byeoon/HierarchyRenamer ")]
     static void Test()
     {
-        EditorUtility.DisplayDialog("Example Script", "Opened This Dialog", "OK");
+        EditorUtility.DisplayDialog("HierarchyRenamer", "Hello world!", "OK");
     }
 }
