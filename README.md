@@ -1,6 +1,14 @@
-# HierarchyRenamee
-Mass renames items in a hierarchy to make rigging bones in VRChat easier.
+<div align="center">
 
+# HierarchyRenamer
+Mass renames items in an asset hierarchy to make rigging bones and organizing your project easier.
+
+
+</div>
+
+# 🌐 Install and Setup
+There are two ways you can download HierarchyRenamer. If you use the VRChat Creator Companion, you want to (TBD). If you are using normal Unity, download the unitypackage from Releases.
+<!--
 ## ▶ Getting Started
 
 * Press [![Use This Template](https://user-images.githubusercontent.com/737888/185467681-e5fdb099-d99f-454b-8d9e-0760e5a6e588.png)](https://github.com/vrchat-community/template-package/generate)
@@ -71,3 +79,4 @@ This is a composite action combining a variety of existing GitHub Actions and so
 [build-listing.yml](.github/workflows/build-listing.yml)
 
 This is a composite action which builds a vpm-compatible [Repo Listing](https://vcc.docs.vrchat.com/vpm/repos) based on the releases you've created. In order to find all your releases and combine them into a listing, it checks out [another repository](https://github.com/vrchat-community/package-list-action) which has a [Nuke](https://nuke.build/) project which includes the VPM core lib to have access to its types and methods. This project will be expanded to include more functionality in the future - for now, the action just calls its `BuildRepoListing` target.
+-->
