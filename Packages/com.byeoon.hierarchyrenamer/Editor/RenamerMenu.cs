@@ -21,18 +21,28 @@ using UnityEngine.UIElements;
         private static VisualElement _manifestPackageList;
         private static Color _colorPositive = Color.green;
         private static Color _colorNegative = new Color(1, 0.3f, 0.3f);
+        private static Button _actionButton;
+        private static TextField _authorUrlField;
+
+        // Variables
+        public static bool suffixMode = true;
+        public static bool enableColoring = true;
 
         [MenuItem("byeoon/HierarchyRenamer")]
         public static void ShowWindow()
         {
             RenamerMenu wnd = GetWindow<RenamerMenu>();
             wnd.titleContent = new GUIContent("HierarchyRenamer");
+            _rootView = rootVisualElement;
+            _rootView.Add(RenamerButton());
+            _rootView.styleSheets.Add((StyleSheet) Resources.Load("RenamerWindow"));
+            
         }
 
 
-       private VisualElement CreateInitialButton()
+       private VisualElement RenamerButton()
         {
-            _actionButton = new Button(OnActionButtonPressed)
+            _actionButton = new Button(RenamerButtonPress)
             {
                 text = "Rename",
                 name = "action-button"
@@ -40,15 +50,16 @@ using UnityEngine.UIElements;
             return _actionButton;
         }
 
-        private void OnActionButtonPressed()
+        private void RenamerButtonPress()
         {
-            bool result = EditorUtility.DisplayDialog("HierarchyRenamer",
-                $"This will rename everything inside of this asset to what you selected.",
-                "Ok", "Wait, not yet.");
-            if (result)
-            {
-                UnityEditor.PackageManager.Client.Resolve();
-            }
+                if(suffixMode == true)
+                {
+                    UnityEngine.Debug.Log("[byeoon] You are now running with suffix mode enabled.");
+                }
+                else
+                {
+                    UnityEngine.Debug.Log("[byeoon] You are now running with suffix mode disabled.");
+                }
         }
 
     }
