@@ -1,0 +1,11 @@
+{
+  "name": "com.byeoon.hierarchyrenamer",
+  "displayName": "HierarchyRenamer",
+  "version": "1.0.0",
+  "unity": "2019.4",
+  "description": "Mass renames items in an asset hierarchy to make rigging bones and organizing your project easier.",
+  "vrchatVersion": "2022.1.1",
+  "author": {
+    "name": "byeoon"
+  }
+}
