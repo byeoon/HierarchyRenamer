@@ -6,22 +6,9 @@ Mass renames items in an asset hierarchy to make rigging bones and organizing yo
 
 </div>
 
-# 🌐 Install and Setup
+# 🌐 Installation and Setup
 There are two ways you can download HierarchyRenamer. If you use the VRChat Creator Companion, you want to (TBD). If you are using normal Unity, download the unitypackage from Releases.
 <!--
-## ▶ Getting Started
-
-* Press [![Use This Template](https://user-images.githubusercontent.com/737888/185467681-e5fdb099-d99f-454b-8d9e-0760e5a6e588.png)](https://github.com/vrchat-community/template-package/generate)
-to start a new GitHub project based on this template.
-  * Choose a fitting repository name and description.
-  * Set the visibility to 'Public'. You can also choose 'Private' and change it later.
-  * You don't need to select 'Include all branches.'
-* Clone this repository locally using Git.
-  * If you're unfamiliar with Git and GitHub, [visit GitHub's documentation](https://docs.github.com/en/get-started/quickstart/git-and-github-learning-resources) to learn more.
-* Add the folder to Unity Hub and open it as a Unity Project.
-* After opening the project, wait while the VPM resolver is downloaded and added to your project.
-  * This gives you access to the VPM Package Maker and Package Resolver tools.
-
 ## 🚇 Migrating Assets Package
 Full details at [Converting Assets to a VPM Package](https://vcc.docs.vrchat.com/guides/convert-unitypackage)
 
@@ -52,7 +39,6 @@ Some other notes:
   * The root of the project should be a Unity project.
   * Your packages should be in the "Packages" directory.
   * If you deviate from this folder structure, you'll need to update the paths that assume your package is in the "Packages" directory on lines 24, 38, 41 and 57.
-* If you want to store and generate your web files in a folder other than "Website" in the root, you can change the `listPublicDirectory` item [here in build-listing.yml](.github/workflows/build-listing.yml#L17).
 
 ## 🎉 Publishing a Release
 
@@ -61,10 +47,6 @@ You can make a release by running the [Build Release](.github/workflows/release.
 ## 📃 Rebuilding the Listing
 
 Whenever you make a change to a release - manually publishing it, or manually creating, editing or deleting a release, the [Build Repo Listing](.github/workflows/build-listing.yml) action will make a new index of all the releases available, and publish them as a website hosted fore free on [GitHub Pages](https://pages.github.com/). This listing can be used by the VPM to keep your package up to date, and the generated index page can serve as a simple landing page with info for your package. The URL for your package will be in the format `https://username.github.io/repo-name`.
-
-## 🏠 Customizing the Landing Page (Optional)
-
-The action which rebuilds the listing also publishes a landing page. The source for this page is in `Website/index.html`. The automation system uses [Scriban](https://github.com/scriban/scriban) to fill in the objects like `{{ this }}` with information from the latest release's manifest, so it will stay up-to-date with the name, id and description that you provide there. You are welcome to modify this page however you want - just use the existing `{{ template.objects }}` to fill in that info wherever you like. The entire contents of your "Website" folder are published to your GitHub Page each time.
 
 ## 💻 Technical Stuff
 
