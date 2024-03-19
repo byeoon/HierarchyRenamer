@@ -1,8 +1,5 @@
-# VPM Package Template
-
-Starter for making Packages, including automation for building and publishing them.
-
-Once you're all set up, you'll be able to push changes to this repository and have .zip and .unitypackage versions automatically generated, and a listing made which works in the VPM for delivering updates for this package. If you want to make a listing with a variety of packages, check out our [template-package-listing](https://github.com/vrchat-community/template-package-listing) repo.
+# HierarchyRenamee
+Mass renames items in a hierarchy to make rigging bones in VRChat easier.
 
 ## ▶ Getting Started
 
