@@ -23,16 +23,5 @@ public class HierarchyRenamer
         RenamerMenu.ShowWindow();
     }
 
-    [MenuItem("byeoon/Other/About")]
-    static void OpenAboutMessage()
-    {
-        EditorUtility.DisplayDialog("HierarchyRenamer", "HierarchyRenamer is currently running version 1.0", "OK");
-    }
-
-    [MenuItem("byeoon/Other/Open GitHub Repository")]
-    static void OpenRepositoryLink()
-    {
-        System.Diagnostics.Process.Start("explorer.exe", "http://github.com/byeoon/HierarchyRenamer");
-    }
 
 }
