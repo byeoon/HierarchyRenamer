@@ -35,7 +35,6 @@ public class RenamerMenu : EditorWindow
 
 
    private static bool _IsOn;
-
     public static bool IsOn
     {
         get
@@ -62,62 +61,54 @@ public class RenamerMenu : EditorWindow
         _rootView.Add(TitleLabel());
         _rootView.Add(ImageThing());
         _rootView.Add(RenamerInput());
-       
         _rootView.styleSheets.Add((StyleSheet)Resources.Load("RenamerWindow"));
     }
 
     private void RenameButtonClicked()
     {
-        Debug.Log("Debug: " + "obj: " + publicObjectName + "sufix: " +  publicSuffixName);
-        if (enableColoring)
-        {
-             IsOn = !IsOn;
+        Debug.Log("[byeoon] Renamed object " + publicObjectName + " with sufix " +  publicSuffixName);
+        if (enableColoring) {
+            IsOn = !IsOn;
             EditorApplication.RepaintHierarchyWindow();
             Debug.Log("[byeoon] Finished with colored hierarchy.");
         }
         publicObj.name = publicObj.name + " " + publicSuffixName;
-        Debug.Log(_objectSelector);
+        // Debug.Log(_objectSelector);
     }
 
     private VisualElement RenamerInput()
     {
         _authorNameField = new TextField("Suffix: ");
-        _objectSelector = new ObjectField("Object: ")
-        {
+        _objectSelector = new ObjectField("Object: ") {
             objectType = typeof(GameObject),
         };
         _checkboxColor = new Toggle("Enable Color Highlight:");
         _colorPicker = new ColorField("Color: ");
         _colorPicker.visible = false;
         enableColoring = false;
-        _renameButton = new Button(RenameButtonClicked)
-        {
+
+        _renameButton = new Button(RenameButtonClicked) {
             text = "Rename & Apply",
             name = "action-button"
         };
 
-        _authorNameField.RegisterValueChangedCallback((evt) =>
-        {
+        _authorNameField.RegisterValueChangedCallback((evt) => {
             publicSuffixName = evt.newValue;
         });
 
-        _objectSelector.RegisterValueChangedCallback((evt) =>
-       {
+        _objectSelector.RegisterValueChangedCallback((evt) => {
            publicObj =  (GameObject) evt.newValue;
            Debug.Log($"[byeoon] Selected a GameObject with the name: {evt.newValue}");
        });
 
-        _checkboxColor.RegisterValueChangedCallback((evt) =>
-        {
+        _checkboxColor.RegisterValueChangedCallback((evt) => {
             _colorPicker.visible = evt.newValue;
             enableColoring = evt.newValue;
-
         });
 
-        _colorPicker.RegisterValueChangedCallback((evt) =>
-          {
+        _colorPicker.RegisterValueChangedCallback((evt) => {
               rgbThing = evt.newValue;
-          });
+        });
 
         var box = new Box();
         box.Add(_authorNameField);
@@ -130,15 +121,13 @@ public class RenamerMenu : EditorWindow
 
     private VisualElement TitleLabel()
     {
-        _titleLabel = new Label(" \n   HierarchyRenamer");
+        _titleLabel = new Label(" \nHierarchyRenamer");
         return _titleLabel;
     }
 
         private VisualElement ImageThing()
     {
-        _imageLogo = new Image() {
-      
-        };
+        _imageLogo = new Image() { };
         return _imageLogo;
     }
 
@@ -154,4 +143,9 @@ public class RenamerMenu : EditorWindow
         System.Diagnostics.Process.Start("explorer.exe", "http://github.com/byeoon/HierarchyRenamer");
     }
 
+    [MenuItem("byeoon/Other/Reset Hierarchy Colors")]
+    static void ResetColors()
+    {
+     // TODO
+    }
 }

@@ -29,9 +29,7 @@ public class RealHierarchyShit
                 Color textColor = Color.white;
                 Texture2D texture = null;
                 int childCount = RenamerMenu.publicObj.transform.childCount;
-                if (obj.name == RenamerMenu.publicObj.name)
-                {
-
+                if (obj.name == RenamerMenu.publicObj.name) {
                     backgroundColor = RenamerMenu.rgbThing;
                     textColor = new Color(1.9f, 0.9f, 0.9f);
                 }
@@ -49,8 +47,7 @@ public class RealHierarchyShit
                 textColor = new Color(0.9f, 0.9f, 0.9f);
             }
                 */
-                if (!RenamerMenu.enableColoring)
-                {
+                if (!RenamerMenu.enableColoring) {
                     backgroundColor = new Color(0.9f, 0.9f, 0.0f, 0.01f);
                     textColor = new Color(0.9f, 0.9f, 0.9f, 0.01f);
                 }
@@ -61,13 +58,9 @@ public class RealHierarchyShit
                     Rect bgRect = new Rect(selectionRect.x, selectionRect.y, selectionRect.width + 50, selectionRect.height);
 
                     EditorGUI.DrawRect(bgRect, backgroundColor);
-                    EditorGUI.LabelField(offsetRect, obj.name, new GUIStyle()
-                    {
-                        normal = new GUIStyleState() { textColor = textColor },
-                        fontStyle = FontStyle.Bold
-                    }
-                    );
-
+                    EditorGUI.LabelField(offsetRect, obj.name, new GUIStyle() {
+                        normal = new GUIStyleState() { textColor = textColor }, fontStyle = FontStyle.Bold
+                    });
                     if (texture != null)
                         EditorGUI.DrawPreviewTexture(new Rect(selectionRect.position, new Vector2(selectionRect.height, selectionRect.height)), texture);
                 }
