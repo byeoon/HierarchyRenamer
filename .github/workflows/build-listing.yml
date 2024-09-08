@@ -1,4 +1,4 @@
-name: Build Repo Listing
+name: Build Listing
 
 env:
   listPublishDirectory: Website
