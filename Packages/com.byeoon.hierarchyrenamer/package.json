@@ -3,11 +3,11 @@
   "displayName": "HierarchyRenamer",
   "version": "1.0.0",
   "unity": "2022.3",
-  "description": "Simple Package for testing Automation",
+  "description": "Mass renames items in a hierarchy to make rigging armatures easier.",
   "vrchatVersion": "2022.3",
   "author": {
     "name": "byeoon",
-    "email": "byeoon@fibr.social",
-    "url": "https://byeoon.github.io"
+    "email": "byeoon@byeoon.dev",
+    "url": "https://byeoon.dev"
   }
 }
