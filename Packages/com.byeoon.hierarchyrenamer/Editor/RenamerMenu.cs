@@ -56,7 +56,7 @@ public class RenamerMenu: EditorWindow {
   }
 
   private void RenameButtonClicked() {
-    Debug.Log("[byeoon] Renamed object " + publicObjectName + " with suffix " + publicSuffixName + " !");
+    Debug.Log("[byeoon] Successfully renamed with suffix: " + publicSuffixName);
     if (enableColoring) {
       IsOn = !IsOn;
       EditorApplication.RepaintHierarchyWindow();
@@ -125,12 +125,12 @@ public class RenamerMenu: EditorWindow {
 
   [MenuItem("byeoon/Other/About")]
   static void OpenAboutMessage() {
-    EditorUtility.DisplayDialog("HierarchyRenamer", "HierarchyRenamer is currently running version 1.0", "OK");
+    EditorUtility.DisplayDialog("HierarchyRenamer", "HierarchyRenamer is currently running version 1.0.1", "OK");
   }
 
   [MenuItem("byeoon/Other/Open GitHub Repository")]
   static void OpenRepositoryLink() {
-    System.Diagnostics.Process.Start("explorer.exe", "http://github.com/byeoon/HierarchyRenamer2");
+    System.Diagnostics.Process.Start("explorer.exe", "http://github.com/byeoon/HierarchyRenamer");
   }
 
   private static void AddSuffixToAllChildren(Transform parent, string suffix) {
@@ -190,7 +190,6 @@ public class RenamerMenu: EditorWindow {
     if (_colorPicker != null) _colorPicker.value = Color.clear;
 
     EditorApplication.RepaintHierarchyWindow();
-    Debug.Log("[byeoon] Reset hierarchy colors!");
   }
 
 }
