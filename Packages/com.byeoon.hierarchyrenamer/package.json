@@ -1,7 +1,7 @@
 {
   "name": "com.byeoon.hierarchyrenamer",
   "displayName": "HierarchyRenamer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "unity": "2022.3",
   "description": "Mass renames items in a hierarchy to make rigging armatures easier.",
   "vrchatVersion": "2022.3",
