@@ -46,10 +46,10 @@ jobs:
           repository: vrchat-community/package-list-action
           path: ${{ env.pathToCi }}
           clean: false
-
+          
       # Load cached data from previous runs
       - name: Restore Cache
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84
+        uses: actions/cache@v3
         with:
           path: |
             ${{ env.pathToCi }}/.nuke/temp
