@@ -17,6 +17,7 @@ public class RenamerMenu: EditorWindow {
   private static Image _imageLogo;
   private Button _renameButton;
   private static TextField _authorNameField;
+  private static TextField _prefixNameField;
 
   private static Toggle _checkboxColor;
   private static ColorField _colorPicker;
@@ -27,6 +28,7 @@ public class RenamerMenu: EditorWindow {
 
   public static string publicObjectName;
   public static string publicSuffixName;
+  public static string publicPrefixName;
   public static Color rgbThing;
 
   public static UnityEngine.GameObject publicObj;
@@ -43,8 +45,13 @@ public class RenamerMenu: EditorWindow {
 
   [MenuItem("byeoon/HierarchyRenamer")]
   public static void ShowWindow() {
-    RenamerMenu wnd = GetWindow < RenamerMenu > ();
+    RenamerMenu wnd = GetWindow <RenamerMenu>();
     wnd.titleContent = new GUIContent("HierarchyRenamer");
+  }
+
+  [MenuItem("byeoon/Reset Hierarchy Colors")]
+  static void ResetColors() {
+    ResetColoring();
   }
 
   private void CreateGUI() {
@@ -73,7 +80,7 @@ public class RenamerMenu: EditorWindow {
       objectType = typeof (GameObject),
     };
     _checkboxColor = new Toggle("Enable Color Highlight:");
-    _colorPicker = new ColorField("Color: ");
+    _colorPicker = new ColorField("Color: "); // TODO: fix alpha being set to 0, maybe disable alpha change
     _colorPicker.visible = false;
     enableColoring = false;
 
@@ -113,11 +120,6 @@ public class RenamerMenu: EditorWindow {
     return _titleLabel;
   }
 
-  [MenuItem("byeoon/Reset Hierarchy Colors")]
-  static void ResetColors() {
-    ResetColoring();
-  }
-
   private VisualElement ImageThing() {
     _imageLogo = new Image() {};
     return _imageLogo;
@@ -125,7 +127,7 @@ public class RenamerMenu: EditorWindow {
 
   [MenuItem("byeoon/Other/About")]
   static void OpenAboutMessage() {
-    EditorUtility.DisplayDialog("HierarchyRenamer", "HierarchyRenamer is currently running version 1.0.1", "OK");
+    EditorUtility.DisplayDialog("HierarchyRenamer", "HierarchyRenamer is currently running version 1.1.0", "OK");
   }
 
   [MenuItem("byeoon/Other/Open GitHub Repository")]
