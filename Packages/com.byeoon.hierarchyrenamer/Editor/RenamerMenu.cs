@@ -16,32 +16,27 @@ public class RenamerMenu: EditorWindow {
   private static Label _titleLabel;
   private static Image _imageLogo;
   private Button _renameButton;
+  private Button _onlyColorButton;
   private static TextField _authorNameField;
   private static TextField _prefixNameField;
 
   private static Toggle _checkboxColor;
+  private static Toggle _checkboxLightText;
   private static ColorField _colorPicker;
   private static ObjectField _objectSelector;
 
   // Variables
   public static bool enableColoring = true;
+  public static bool lightText;
 
+ // Objects 
   public static string publicObjectName;
   public static string publicSuffixName;
   public static string publicPrefixName;
   public static Color rgbThing;
-
+ 
   public static UnityEngine.GameObject publicObj;
 
-  private static bool _IsOn;
-  public static bool IsOn {
-    get {
-      return _IsOn;
-    }
-    set {
-      _IsOn = value;
-    }
-  }
 
   [MenuItem("byeoon/HierarchyRenamer")]
   public static void ShowWindow() {
@@ -62,31 +57,47 @@ public class RenamerMenu: EditorWindow {
     _rootView.styleSheets.Add((StyleSheet) Resources.Load("RenamerWindow"));
   }
 
+ // This function is what runs when you click the Rename button.
   private void RenameButtonClicked() {
     Debug.Log("[byeoon] Successfully renamed with suffix: " + publicSuffixName);
     if (enableColoring) {
-      IsOn = !IsOn;
-      EditorApplication.RepaintHierarchyWindow();
+      EditorApplication.RepaintHierarchyWindow(); // refreshes hierarchy
     }
 
-    publicObj.name = publicObj.name + " " + publicSuffixName;
+    publicObj.name = publicObj.name + " " + publicSuffixName; // changes parent name
     Undo.RegisterFullObjectHierarchyUndo(publicObj, "Recursive Rename");
-    AddSuffixToAllChildren(publicObj.transform, " " + publicSuffixName);
+    AddSuffixToAllChildren(publicObj.transform, " " + publicSuffixName); // changes all names inside of parent
   }
 
+    private void RepaintOnly() {
+    if (enableColoring) {
+      EditorApplication.RepaintHierarchyWindow();
+    }
+  }
+
+ // This is where the UI functions are registered and where event functions are located.
   private VisualElement RenamerInput() {
     _authorNameField = new TextField("Suffix: ");
     _objectSelector = new ObjectField("Object: ") {
       objectType = typeof (GameObject),
     };
     _checkboxColor = new Toggle("Enable Color Highlight:");
-    _colorPicker = new ColorField("Color: "); // TODO: fix alpha being set to 0, maybe disable alpha change
+    _checkboxLightText = new Toggle("Light Text Color? :");
+    _colorPicker = new ColorField("Color: ") {
+      showAlpha = false,
+          value = new Color(1f, 1f, 1f, 1f)
+      };
     _colorPicker.visible = false;
     enableColoring = false;
 
     _renameButton = new Button(RenameButtonClicked) {
       text = "Rename & Apply",
-        name = "action-button"
+      name = "action-button"
+    };
+
+      _onlyColorButton = new Button(RepaintOnly) {
+      text = "Only Apply Colors",
+      name = "action-button"
     };
 
     _authorNameField.RegisterValueChangedCallback((evt) => {
@@ -99,7 +110,12 @@ public class RenamerMenu: EditorWindow {
 
     _checkboxColor.RegisterValueChangedCallback((evt) => {
       _colorPicker.visible = evt.newValue;
+      _checkboxLightText.visible = evt.newValue;
       enableColoring = evt.newValue;
+    });
+
+    _checkboxLightText.RegisterValueChangedCallback((evt) => {
+      lightText = evt.newValue;
     });
 
     _colorPicker.RegisterValueChangedCallback((evt) => {
@@ -110,8 +126,10 @@ public class RenamerMenu: EditorWindow {
     box.Add(_authorNameField);
     box.Add(_objectSelector);
     box.Add(_checkboxColor);
+    box.Add(_checkboxLightText);
     box.Add(_colorPicker);
     box.Add(_renameButton);
+    box.Add(_onlyColorButton);
     return box;
   }
 
@@ -121,13 +139,15 @@ public class RenamerMenu: EditorWindow {
   }
 
   private VisualElement ImageThing() {
-    _imageLogo = new Image() {};
+    _imageLogo = new Image() {
+
+    };
     return _imageLogo;
   }
 
   [MenuItem("byeoon/Other/About")]
   static void OpenAboutMessage() {
-    EditorUtility.DisplayDialog("HierarchyRenamer", "HierarchyRenamer is currently running version 1.1.0", "OK");
+    EditorUtility.DisplayDialog("HierarchyRenamer", "HierarchyRenamer is currently running version 1.2.0", "OK");
   }
 
   [MenuItem("byeoon/Other/Open GitHub Repository")]
@@ -153,19 +173,28 @@ public class RenamerMenu: EditorWindow {
   }
 
   private static void HandleHierarchyWindowItemOnGUI(int instanceID, Rect selectionRect) {
-    if (!IsOn || !enableColoring || publicObj == null) return;
+    if (!enableColoring || publicObj == null) return;
 
     GameObject obj = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
     if (obj == null) return;
 
     if (IsPartOfHierarchy(publicObj.transform, obj.transform)) {
       EditorGUI.DrawRect(selectionRect, rgbThing);
-      EditorGUI.LabelField(selectionRect, obj.name, new GUIStyle() {
+     if(!lightText) {
+       EditorGUI.LabelField(selectionRect, obj.name, new GUIStyle() {
         normal = new GUIStyleState() {
             textColor = Color.black
           },
           fontStyle = FontStyle.Bold
       });
+     } else {
+             EditorGUI.LabelField(selectionRect, obj.name, new GUIStyle() {
+        normal = new GUIStyleState() {
+            textColor = Color.white
+          },
+          fontStyle = FontStyle.Bold
+      });
+     }
     }
   }
 
@@ -185,12 +214,8 @@ public class RenamerMenu: EditorWindow {
 
   private static void ResetColoring() {
     enableColoring = false;
-    IsOn = false;
     rgbThing = Color.clear;
-
     if (_checkboxColor != null) _checkboxColor.value = false;
-    if (_colorPicker != null) _colorPicker.value = Color.clear;
-
     EditorApplication.RepaintHierarchyWindow();
   }
 
