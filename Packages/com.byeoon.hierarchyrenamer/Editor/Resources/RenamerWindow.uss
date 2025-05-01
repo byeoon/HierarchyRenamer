@@ -1,7 +1,8 @@
 .unity-box {
-    margin: 5px;
+    margin: 10px;
     padding:15px;
-    color: #040247;
+    min-height: 300px;
+    background-color:rgb(59, 59, 77);
 }
 
 .unity-label {
@@ -10,5 +11,10 @@
 
 .unity-button {
     font-size: 16px;
-    color: #040247;
+    color:rgb(85, 82, 153);
+    background-color: rgb(10, 9, 26);
+}
+
+.unity-button:hover {
+    background-color: rgb(28, 25, 71);
 }
